@@ -1,0 +1,11 @@
+{
+  "name": "effectlab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bash build.sh",
+    "dev": "bash build.sh --watch",
+    "assemble": "node assemble.mjs"
+  }
+}
