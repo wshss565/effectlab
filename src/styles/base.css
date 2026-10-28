@@ -1,0 +1,211 @@
+/* 基础：重置 + 排版 + 通用组件（按钮/标签/滑块/开关） */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-gray-950);
+  color: var(--text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-size-m);
+  line-height: 1.6;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-family-heading);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img, canvas { display: block; max-width: 100%; }
+
+button { font-family: inherit; }
+
+::selection { background: var(--color-blue-600); color: #fff; }
+
+:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+
+/* 滚动条：暗色细条 */
+* { scrollbar-width: thin; scrollbar-color: var(--color-gray-700) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--color-gray-700); border-radius: 4px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--color-gray-600); }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ---- 等宽标签 ---- */
+.mono { font-family: var(--font-family-mono); font-variant-numeric: tabular-nums; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-mono);
+  font-size: var(--text-tag);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.tag--accent { color: var(--text-accent); }
+.tag--warning { color: var(--text-warning); }
+.tag--success { color: var(--text-success); }
+
+/* ---- 按钮 ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--border-radius-s);
+  background: var(--color-gray-900);
+  color: var(--text-primary);
+  font-size: var(--text-size-s);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+  user-select: none;
+}
+.btn:hover { border-color: var(--border-hover); background: var(--color-gray-850); }
+.btn:active { border-color: var(--border-active); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn:disabled:hover { border-color: var(--border-secondary); background: var(--color-gray-900); }
+
+.btn--primary {
+  background: var(--color-blue-600);
+  border-color: var(--color-blue-500);
+  color: var(--text-on-accent);
+}
+.btn--primary:hover { background: var(--color-blue-500); border-color: var(--color-blue-400); }
+
+.btn--ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
+.btn--ghost:hover { background: var(--color-gray-900); color: var(--text-primary); border-color: transparent; }
+
+.btn--lg { height: 44px; padding: 0 var(--space-6); font-size: var(--text-size-m); }
+.btn--sm { height: 28px; padding: 0 var(--space-3); font-size: var(--text-size-xs); }
+.btn--icon { width: 36px; padding: 0; }
+.btn--icon.btn--sm { width: 28px; }
+
+.btn svg { flex: none; }
+
+/* ---- 滑块 ---- */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.range::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--color-gray-600);
+  border-radius: 1px;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--color-gray-50);
+  border: none;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.range:hover::-webkit-slider-thumb { transform: scale(1.2); }
+.range::-moz-range-track { height: 2px; background: var(--color-gray-600); border-radius: 1px; }
+.range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--color-gray-50); border: none; }
+
+/* ---- 颜色输入 ---- */
+.color-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--border-radius-s);
+  background: transparent;
+  cursor: pointer;
+}
+.color-input::-webkit-color-swatch-wrapper { padding: 2px; }
+.color-input::-webkit-color-swatch { border: none; border-radius: 2px; }
+.color-input::-moz-color-swatch { border: none; border-radius: 2px; }
+
+/* ---- 下拉菜单 ---- */
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 140px;
+  background: var(--color-gray-900);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--border-radius-m);
+  box-shadow: var(--shadow-pop);
+  padding: var(--space-1);
+  z-index: 50;
+}
+.menu[hidden] { display: none; }
+.menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: var(--border-radius-xs);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-size-s);
+  cursor: pointer;
+  text-align: left;
+}
+.menu__item:hover { background: var(--color-gray-850); color: var(--text-primary); }
+.menu__item .mono { color: var(--text-tertiary); font-size: var(--text-size-xs); }
+
+/* ---- 视觉隐藏但可交互（file input 专用：避开 display:none 在部分 WebView 里
+   拦截 label 转发 / 程序 click 的问题） ---- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- 文本输入 ---- */
+.text-input {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  padding: 0 var(--space-2);
+  background: var(--color-gray-950);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--border-radius-xs);
+  color: var(--text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-size-s);
+}
+.text-input::placeholder { color: var(--text-disabled); }
+.text-input:focus { border-color: var(--border-focus); outline: none; }
